@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import './App.css'
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
-const Home = () => {
+function App() {
+  const [currentLight, setCurrentLight] = useState('');
+	const setRed = () => {
+		setCurrentLight('red');
+		setTimeout(() => {
+			setGreen();
+		},7000);
+	}
+	const setYellow = () => {
+		setCurrentLight('yellow');
+		setTimeout(() => {
+			setRed();
+		},2000);
+	}
+	const setGreen = () => {
+		setCurrentLight('green');
+		setTimeout(() => {
+			setYellow();
+		},5000);
+	}
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div>
+			<div className="container">
+				<div onClick={()=>setCurrentLight('red')} className={'red light ' + (currentLight === 'red' ? 'active' : '')}></div>
+				<div onClick={()=>setCurrentLight('yellow')} className={'yellow light ' + (currentLight === 'yellow' ? 'active' : '')}></div>
+				<div onClick={()=>setCurrentLight('green')} className={'green light ' + (currentLight === 'green' ? 'active' : '')}></div>
+			</div>
+			<button onClick={()=>setRed()}>Play</button>
 		</div>
 	);
 };
 
-export default Home;
+export default App
+
